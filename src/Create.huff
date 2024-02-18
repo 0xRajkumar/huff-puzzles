@@ -11,12 +11,6 @@
 
  #define function makeContract() payable returns(address)
 
-// 0x6d64636166666560005260056000f360005260E06000f3
-
-
-// 23
-
-// push23
  #define macro MAIN() = takes(0) returns(0) {
     0x00 calldataload 0xE0 shr
     dup1 __FUNC_SIG(makeContract) eq mC jumpi
