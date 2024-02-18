@@ -10,9 +10,14 @@
  *
  *  The task is to write within the `MAIN` macro below, huff code that reverts (all the time) with the custom error `OnlyHuff()`
 */
-
+// 0xe829737a
 #define error OnlyHuff()
 
 #define macro MAIN() = takes(0) returns(0) {
-    
+    0xe829737a9f3a0deff344bce4ded8041e9ac3a1391a12e5abf2b77731694ef944
+    0x00
+    mstore
+    0x20
+    0x00 
+    revert
 }
