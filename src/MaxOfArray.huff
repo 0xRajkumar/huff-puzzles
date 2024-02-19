@@ -9,6 +9,93 @@
 
 #define function maxOfArray(uint256[]) payable returns(uint256)
 
+
+#define macro MAXOFARRAY() = takes (0) returns (0) {
+    //stored length of array as 0x00
+    0x04
+    calldataload
+    0x04 
+    add
+    calldataload
+    0x00
+    mstore
+
+    //revert if length is zero
+    0x00
+    mload
+    0x00
+    eq
+    gtR
+    jumpi
+
+    //store if offset from where Items starts at 0x20
+    0x04
+    calldataload
+    0x24
+    add
+    0x20
+    mstore
+
+    Loop:
+        //Update the if length is zero then return loop and return data
+        0x00
+        mload
+        0x00
+        eq
+        CallDone
+        jumpi
+
+
+
+        //Store the sum of item at 0x40 but stack still contains location of current offset which we will update
+        0x20
+        mload
+        calldataload
+        0x40
+        mload
+        lt
+        iszero
+        skip jumpi
+        0x20
+        mload
+        calldataload
+        0x40
+        mstore
+
+
+        skip:    
+        //offset updated at 0x20
+        0x20
+        mload
+        0x20
+        add
+        0x20
+        mstore
+
+        //Updating the length
+        0x01
+        0x00
+        mload
+        sub
+        0x00
+        mstore
+
+
+        //Enter the loop again
+        Loop
+        jump 
+
+    CallDone:
+        0x20
+        0x40
+        return
+    gtR:
+    0x00 0x00 revert
+}
 #define macro MAIN() = takes(0) returns(0) {
-   
+    0x00 calldataload 0xE0 shr
+    __FUNC_SIG(maxOfArray) eq mrp jumpi
+    0x00 0x00 revert
+    mrp:
+        MAXOFARRAY()
 }
