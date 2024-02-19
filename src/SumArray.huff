@@ -74,10 +74,10 @@
         mstore
 
 
-        //Else entre the loop again
+        //Enter the loop again
         Loop
         jump 
-        
+
     CallDone:
         0x20
         0x40
